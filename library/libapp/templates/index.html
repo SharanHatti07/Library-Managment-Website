@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'index.js' %}"></script>
+    <title>django project</title>
+    <style>
+        h1 {
+            display: block;
+            text-align: center;
+            background-color: sandybrown;
+        }
+
+        .container {
+            margin: auto;
+        }
+
+        .row {
+            margin-top: 5%;
+        }
+
+        .text {
+            display: inline-block;
+            padding: 0.5em 1em;
+            min-width: 20em;
+            line-height: 1.2em;
+            background: #FFD72A;
+            position: relative;
+            width: 100%;
+        }
+    </style>
+
+    <!-- <script src="index.js"></script> -->
+</head>
+
+<body>
+    <h1 style="text-shadow: 50px;">WELCOME TO LIBRARY</h1>
+    <div class="content-wrapper" style="background-color: aqua;">
+        <p class="ribbon">
+            <!-- ::before -->
+            <span class="text">
+                <!-- ::before -->
+                <span class="bold">
+                    <!-- ::before -->
+                    <marquee direction="left">
+                        <div style="width: 100%;">
+                            <b>WELCOME TO OUR LIBRARY. WE PROVIDE AMAZING BUCKET OF KNOWLEDGE TO YOU. ENJOY YOUR BOOKS.
+                                HAVE A NICE DAY.</b>
+                        </div>
+                    </marquee>
+                </span>
+                <!-- ::after -->
+            </span>
+            <!-- ::after -->
+        </p>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">LIBRARY</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Edit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Delete</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Author</a></li>
+                            <li><a class="dropdown-item" href="#">Price</a></li>
+                            <li><a class="dropdown-item" href="#">Date</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search by title" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="row glass-card-list" style="display: block;">
+        <div class="col-md-12">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="card-group mb-2 mb-lg-4">
+
+
+                        {% for b in books %}
+
+                        <form action="/v" method="GET" class="col-lg-4 my-2">
+                            {% csrf_token %}
+
+                            <!-- Card -->
+
+                            <div class="card mx-2">
+                                <input hidden name="bookID" type="number" value={{books.id}}>
+                                <img src='' class="card-img-top" style="height: 20rem;" alt="">
+                                <div class="card-body" style="max-height: 20rem;">
+                                    <h5 class="card-title text-center title">{{b.NAME}}
+                                    </h5>
+                                    <div class="row listpage">
+                                        <span><b>{{b.Author}} </b> </span>
+                                        <span> <b>{{b.Language}}</b></span>
+
+                                        <p class="truncate ">
+
+                                            {{books.libapp_book }}
+                                        </p>
+                                        </span>
+                                    </div>
+                                    <div class="row text-end ">
+                                        <div class="col-8 ">
+                                            <button type="submit" id="cardButton"
+                                                class="text-decoration-underline title"
+                                                style="border-style: hidden; background-color: transparent;">
+                                                <h5> View More <h5>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
